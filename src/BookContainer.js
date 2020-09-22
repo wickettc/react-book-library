@@ -24,7 +24,6 @@ function BookContainer() {
     if (!formTitle.value && !formPages.value && !formAuthor.value) return;
     setLibrary((prevState) => {
       const updatedState = [...prevState];
-      console.log(formTitle.value, formAuthor.value, formPages.value);
       return [
         ...updatedState,
         {
@@ -41,11 +40,22 @@ function BookContainer() {
   }
 
   function handleDelete(book) {
-    let index = library.indexOf(book);
+    const index = library.indexOf(book);
     setLibrary((prevLib) => {
-      let arr = [...prevLib];
-      arr.splice(index, 1);
-      return arr;
+      const updatedState = [...prevLib];
+      updatedState.splice(index, 1);
+      return updatedState;
+    });
+  }
+
+  function handleRead(book) {
+    const index = library.indexOf(book);
+    setLibrary((prevLib) => {
+      const updatedState = [...prevLib];
+      updatedState[index].wasRead
+        ? (updatedState[index].wasRead = false)
+        : (updatedState[index].wasRead = true);
+      return updatedState;
     });
   }
 
@@ -53,7 +63,6 @@ function BookContainer() {
     <div>
       <AddBookForm handleForm={handleForm} />
       <div className="book-container">
-        {console.log(library)}
         {library.map((book, index) => {
           return (
             <Book
@@ -61,6 +70,7 @@ function BookContainer() {
               book={book}
               wasRead={book.wasRead ? 'Yes' : 'No'}
               handleDelete={handleDelete}
+              handleRead={handleRead}
             />
           );
         })}

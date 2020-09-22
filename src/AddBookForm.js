@@ -5,6 +5,12 @@ function AddBookForm(props) {
   const [author, setAuthor] = useState('');
   const [pages, setPages] = useState('');
 
+  function formReset() {
+    setTitle('');
+    setAuthor('');
+    setPages('');
+  }
+
   return (
     <form onSubmit={props.handleForm} autoComplete="off">
       <label>
@@ -41,7 +47,8 @@ function AddBookForm(props) {
         Was Read? :
         <input type="checkbox" name="formRead" />
       </label>
-      <button>Add Book</button>
+      {/* I am sure there is a better way to do this other than setTimeout */}
+      <button onClick={() => setTimeout(formReset, 5)}>Add Book</button>
     </form>
   );
 }
