@@ -1,19 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function AddBookForm(props) {
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [pages, setPages] = useState('');
+
   return (
     <form onSubmit={props.handleForm} autoComplete="off">
       <label>
         Title :
-        <input type="text" placeholder="Title" name="formTitle" />
+        <input
+          type="text"
+          onChange={(event) => setTitle(event.target.value)}
+          value={title}
+          placeholder="Title"
+          name="formTitle"
+        />
       </label>
       <label>
         Author :
-        <input type="text" placeholder="Author" name="formAuthor" />
+        <input
+          type="text"
+          onChange={(event) => setAuthor(event.target.value)}
+          value={author}
+          placeholder="Author"
+          name="formAuthor"
+        />
       </label>
       <label>
         Pages :
-        <input type="number" placeholder="# of Pages" name="formPages" />
+        <input
+          type="number"
+          onChange={(event) => setPages(event.target.value)}
+          value={pages}
+          placeholder="# of Pages"
+          name="formPages"
+        />
       </label>
       <label>
         Was Read? :
